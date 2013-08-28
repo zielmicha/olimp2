@@ -9,15 +9,15 @@ body {
 
 #eventholder {
     padding: 1em;
-    min-width: 800px;
+    min-width: 1000px;
     display: inline-block;
     text-align: left;
 }
 
 #events {
-    -moz-column-count: 3; /* Firefox */
-    -webkit-column-count: 3; /* Safari and Chrome */
-    column-count: 3;
+    -moz-column-count: 4; /* Firefox */
+    -webkit-column-count: 4; /* Safari and Chrome */
+    column-count: 4;
     height: 30em;
 }
 

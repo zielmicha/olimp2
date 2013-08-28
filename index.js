@@ -29,11 +29,14 @@ function load_msg() {
                 elem.show('slow')
             });
             if(cached.length != 0)
-                $("html, body").animate({ scrollTop: $(document).height()},
+                $("html, body").animate({ scrollTop: $('#events :last').position().top,
+                                          scrollLeft: $('#events :last').position().left
+                                          - $(window).width()},
                                         { duration: "slow", queue: false });
             cached = data
             if(!seen_end)
                 setTimeout(load_msg, 200)
+            make_sizes()
         },
         dataType: 'json'
     });
@@ -41,12 +44,16 @@ function load_msg() {
 
 $(load_msg);
 
-function make_sizes() {
+var bestMul = 0
+
+function make_sizes(halt) {
     var size = ($(window).height()
-                    - $('.body').height() - 100)
-    console.log($('html').css('height'), size)
+                    - $('.body').height() - 50);
     $('#events').css('height', size + 'px')
 }
 
 $(make_sizes)
-$(window).resize(make_sizes)
+$(window).resize(function() {
+    bestMul = 0
+    make_sizes()
+})
