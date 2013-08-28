@@ -4,22 +4,55 @@ body {
 
 .body {
     display: inline-block;
-    max-width: 700px;
     text-align: left;
 }
 
+#eventholder {
+    padding: 1em;
+    min-width: 800px;
+    display: inline-block;
+    text-align: left;
+}
+
+#events {
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    height: 30em;
+}
+
 .ev {
-    height: 1em;
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    overflow: hidden;
+    display: block;
+    width: 300px;
+}
+
+.ev-progress {
+    font-size: 1.5em;
+}
+
+.ev-error, .ev-msg {
+    padding: 0.1em;
 }
 
 .ev-error {
-    background-color: red;
+    color: red;
 }
 
 .ev-msg {
-    background-color: green;
+    color: green;
 }
 
 .ev-end {
-    background-color: blue;
+    color: blue;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-size: 1.5em;
+}
+
+.ev-end:before {
+    content: "Finished.";
 }

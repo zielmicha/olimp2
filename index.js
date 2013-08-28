@@ -40,3 +40,13 @@ function load_msg() {
 }
 
 $(load_msg);
+
+function make_sizes() {
+    var size = ($(window).height()
+                    - $('.body').height() - 100)
+    console.log($('html').css('height'), size)
+    $('#events').css('height', size + 'px')
+}
+
+$(make_sizes)
+$(window).resize(make_sizes)
