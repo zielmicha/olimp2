@@ -19,11 +19,16 @@ function load_msg() {
         url: '/' + ident + '.' + cached.length + '.wait.js',
         success: function(data) {
             var seen_end = false
-            cached = data
-            $.each(data, function(i, elem) {
-                if(elem.type == 'end') seen_end = true
-                $('<div class=ev>').addClass('ev-' + elem.type).text(elem.val).appendTo('#events')
+            $.each(data, function(i, item) {
+                if(item.type == 'end') seen_end = true
+                if(i < cached.length) return
+                var elem = $('<div class=ev>')
+                elem.addClass('ev-' + item.type).text(item.val)
+                elem.hide()
+                elem.appendTo('#events')
+                elem.show('slow')
             });
+            cached = data
             if(!seen_end)
                 setTimeout(load_msg, 200)
         },
