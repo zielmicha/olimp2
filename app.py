@@ -38,8 +38,8 @@ def handle0(environ, path, fields):
     headers = [('Content-Type', 'text/%s; charset=utf-8' % type)]
 
     if 'data' in fields:
-        data = fields['data']
-        task = fields['tasks']
+        data = fields['data'].value
+        task = fields['tasks'].value
         ident = begin_checking(data, task)
         return 302, [('Location', '/#' + ident)], []
 
