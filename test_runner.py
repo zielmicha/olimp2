@@ -12,7 +12,7 @@ def main():
     os.dup2(null.fileno(), 2)
     try:
         main0()
-    except:
+    except Exception:
         message(traceback.format_exc(), 'error')
 
 def main0():
@@ -29,6 +29,12 @@ def compile_program(program):
     mime = r.split(':')[1].split(';')[0].strip()
     if mime == 'application/x-executable':
         message('Detected Linux compiled program')
+        os.chmod(program, 0o755)
+    elif mime == 'application/x-dosexec':
+        message('Detected Windows compiled program')
+        os.rename('program', 'program.exe')
+        with open('program', 'w') as f:
+            f.write('#!/bin/sh\nwine program.exe\nexit 0\n')
         os.chmod(program, 0o755)
     elif mime.startswith('text/'):
         # attempt to compile
