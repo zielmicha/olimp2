@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <title>olimp2</title>
+  <link rel=stylesheet type="text/css" href="index.css">
+</head>
+<body>
+<div class=body>
+  <h1>olimp2</h1>
+  <form method=post enctype="multipart/form-data">
+    Zadanie:
+    <select name=tasks></select>
+    <br>
+    Rozwiązanie do sprawdzenia:
+    <br>
+    <input type=file name=data>
+    <button>Ok</button>
+    <br>
+    Obsługiwane formaty:
+    kod źródłowy (.cpp), Linuksowy plik wykonywalny (x86/x86_64),
+    Windowsowy plik wykonywalny (tylko 32-bitowy).
+    <br>
+    Przesłane pliki są zapisywane tylko na czas sprawdzania rozwiązania.
+  </form>
+  <div id=events></div>
+</div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
