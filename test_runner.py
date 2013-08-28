@@ -4,6 +4,7 @@ import os
 import yaml
 import json
 import traceback
+import sys
 
 def main():
     null = open('/dev/null', 'w')
@@ -14,6 +15,7 @@ def main():
         message(traceback.format_exc(), 'error')
 
 def main0():
+    message('Starting...', 'progress')
     task = os.environ.get('TASK', 'task')
     program = os.path.abspath(os.environ.get('PROGRAM', 'program'))
     compile_program(program)
@@ -42,6 +44,8 @@ def run_tests(program):
         run_test(program, test)
 
 def run_test(program_path, test):
+    if isinstance(test, basestring):
+        test = {'input': 'cat %s.in' % test, 'checker': 'oicompare $DEST %s.out' % test}
     name = test.get('name', test['input'])
     if name.startswith('cat '):
         name = name[4:]
@@ -77,6 +81,7 @@ def call(argv):
 
 def message(msg, kind='msg'):
     print json.dumps({'val': msg.rstrip(), 'type': kind})
+    sys.stdout.flush()
 
 if __name__ == '__main__':
     main()

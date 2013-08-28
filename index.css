@@ -12,6 +12,10 @@ body {
     height: 1em;
 }
 
+.ev-error {
+    background-color: red;
+}
+
 .ev-msg {
     background-color: green;
 }

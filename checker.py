@@ -10,7 +10,7 @@ def check(task, data, callback):
         raise ValueError('bad task %r' % task)
 
     sandbox = sandbox_client.Sandbox(os.environ.get('SANDBOX_SOCK', '/var/run/sandboxd/sock'))
-    sandbox.timeout = 3
+    sandbox.timeout = 30
     sandbox.tar.add('test_runner.py', arcname='init')
 
     dataf = tempfile.NamedTemporaryFile()

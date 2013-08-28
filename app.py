@@ -8,6 +8,7 @@ import os
 import json
 import cgi
 import time
+import yaml
 
 import checker
 
@@ -69,7 +70,18 @@ def get_fields(environ):
     return cgi.FieldStorage(fp=environ['wsgi.input'], environ=environ)
 
 def get_tasks():
-    return [('add', 'Dodawanie')]
+    l = []
+    for name in os.listdir('.'):
+        if name.startswith('task_'):
+            name = name[5:]
+            l.append((name, get_title(name)))
+    return l
+
+def get_title(name, _cache={}):
+    if name not in _cache:
+        _cache[name] = yaml.safe_load(open('task_%s/def.yaml' % name)).get('name', name)
+    return _cache[name]
+
 
 def begin_checking(data, task):
     ident = os.urandom(10).encode('hex')

@@ -28,6 +28,9 @@ function load_msg() {
                 elem.appendTo('#events')
                 elem.show('slow')
             });
+            if(cached.length != 0)
+                $("html, body").animate({ scrollTop: $(document).height()},
+                                        { duration: "slow", queue: false });
             cached = data
             if(!seen_end)
                 setTimeout(load_msg, 200)
