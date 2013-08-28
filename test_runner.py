@@ -5,6 +5,7 @@ import yaml
 import json
 import traceback
 import sys
+import time
 
 def main():
     null = open('/dev/null', 'w')
@@ -28,6 +29,7 @@ def compile_program(program):
     mime = r.split(':')[1].split(';')[0].strip()
     if mime == 'application/x-executable':
         message('Detected Linux compiled program')
+        os.chmod(program, 0o755)
     elif mime.startswith('text/'):
         # attempt to compile
         os.rename('program', 'program.cpp')
@@ -49,6 +51,7 @@ def run_test(program_path, test):
     name = test.get('name', test['input'])
     if name.startswith('cat '):
         name = name[4:]
+    start_time = time.time()
     message('%s' % name, 'progress')
     generator = subprocess.Popen(test['input'], shell=True,
                                  stdout=subprocess.PIPE)
@@ -69,7 +72,7 @@ def run_test(program_path, test):
         if line.strip() != 'OK':
             message(line, 'error')
     if checker.wait() == 0:
-        message('OK')
+        message('OK, %.1f s' % (time.time() - start_time))
     else:
         message('ANS', 'error')
 
