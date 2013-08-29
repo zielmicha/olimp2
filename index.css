@@ -8,6 +8,10 @@ h1 {
     text-align: center;
 }
 
+a {
+    color: #333;
+}
+
 .body {
     display: inline-block;
     text-align: left;
