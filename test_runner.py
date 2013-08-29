@@ -52,7 +52,7 @@ def run_tests(program):
 
 def run_test(program_path, test):
     if isinstance(test, basestring):
-        test = {'input': 'cat %s.in' % test, 'checker': 'oicompare $DEST %s.out' % test}
+        test = {'input': 'cat %s.in' % test, 'checker': 'oicompare $DEST %s.out' % test, 'name': test}
     name = test.get('name', test['input'])
     if name.startswith('cat '):
         name = name[4:]
