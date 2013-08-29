@@ -4,10 +4,13 @@ import json
 import os
 import tempfile
 
+TASK_DIR = os.environ.get('TASK_DIR', '.')
+
 def check(task, data, callback):
     taskdir = 'task_%s' % task
-    if taskdir not in os.listdir('.'):
+    if taskdir not in os.listdir(TASK_DIR):
         raise ValueError('bad task %r' % task)
+    taskdir = TASK_DIR + '/' + taskdir
 
     sandbox = sandbox_client.Sandbox(os.environ.get('SANDBOX_SOCK', '/var/run/sandboxd/sock'))
     sandbox.timeout = 30

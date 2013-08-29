@@ -71,7 +71,7 @@ def get_fields(environ):
 
 def get_tasks():
     l = []
-    for name in os.listdir('.'):
+    for name in os.listdir(checker.TASK_DIR):
         if name.startswith('task_'):
             name = name[5:]
             l.append((name, get_title(name)))
@@ -79,7 +79,8 @@ def get_tasks():
 
 def get_title(name, _cache={}):
     if name not in _cache:
-        _cache[name] = yaml.safe_load(open('task_%s/def.yaml' % name)).get('name', name)
+        _cache[name] = yaml.safe_load(
+            open(checker.TASK_DIR + '/task_%s/def.yaml' % name)).get('name', name)
     return _cache[name]
 
 
