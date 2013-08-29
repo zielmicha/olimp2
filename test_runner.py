@@ -6,6 +6,7 @@ import json
 import traceback
 import sys
 import time
+import resource
 
 def main():
     null = open('/dev/null', 'w')
@@ -16,6 +17,11 @@ def main():
         message(traceback.format_exc(), 'error')
 
 def main0():
+    resource.setrlimit(resource.RLIMIT_NPROC, (1024, 1024))
+    MEMLIMIT = 512 * 1024 * 1024
+    resource.setrlimit(resource.RLIMIT_AS, (MEMLIMIT, MEMLIMIT))
+    os.nice(20)
+
     message('Starting...', 'progress')
     task = os.environ.get('TASK', 'task')
     program = os.path.abspath(os.environ.get('PROGRAM', 'program'))
