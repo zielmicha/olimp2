@@ -39,7 +39,6 @@ def compile_program(program):
     elif mime.startswith('text/'):
         # attempt to compile
         os.rename('program', 'program.cpp')
-        message('Compiling...', 'progress')
         call(['g++', 'program.cpp', '-O2', '-o', 'program', '-Wno-unused-result'])
         os.unlink('program.cpp')
         message('Compilation successful')
