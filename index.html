@@ -3,25 +3,36 @@
 <head>
   <title>olimp2</title>
   <link rel=stylesheet type="text/css" href="index.css">
+  <link href='http://fonts.googleapis.com/css?family=Eagle+Lake|Quattrocento&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class=body>
   <h1>olimp2</h1>
+  <div class=form-wrapper>
   <form method=post enctype="multipart/form-data">
-    Zadanie:
-    <select name=tasks></select>
-    <br>
-    Rozwiązanie do sprawdzenia:
-    <br>
-    <input type=file name=data>
-    <button>Ok</button>
-    <br>
-    Obsługiwane formaty:
-    kod źródłowy (.cpp), Linuksowy plik wykonywalny (x86/x86_64),
-    Windowsowy plik wykonywalny (tylko 32-bitowy).
-    <br>
-    Przesłane pliki są zapisywane tylko na czas sprawdzania rozwiązania.
+    <table class=form>
+      <tr>
+        <td class=l>Zadanie:
+        <td><select name=tasks></select>
+       <tr>
+         <td class=l>Rozwiązanie:
+         <td><input type=file name=data>
+       <tr>
+         <td>
+         <td><button class=ok>Ok</button>
+    </table>
   </form>
+  © 2013 Michał Zieliński, <a href="https://github.com/zielmicha/olimp2">źródło</a>
+  </div>
+  <div class=info>
+    Obsługiwane formaty:
+    kod źródłowy (.cpp), Linuksowy plik wykonywalny (x86/x86_64).
+    <p>
+    Możesz też spróbować wysłać Windowsowy plik wykonywalny (tylko 32-bitowy),
+    ale szanse, że zadziała są dość małe.
+    <p>
+    Przesłane pliki są zapisywane tylko na czas sprawdzania rozwiązania.
+  </div>
 </div>
 <br clear=both>
 <div id=eventholder>

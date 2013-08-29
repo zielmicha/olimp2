@@ -49,6 +49,8 @@ var bestMul = 0
 function make_sizes(halt) {
     var size = ($(window).height()
                     - $('.body').height() - 50);
+    var each = 50
+    size = parseInt(size / each) * each
     $('#events').css('height', size + 'px')
 }
 
