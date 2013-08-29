@@ -18,7 +18,7 @@ def main():
 
 def main0():
     resource.setrlimit(resource.RLIMIT_NPROC, (1024, 1024))
-    MEMLIMIT = 512 * 1024 * 1024
+    MEMLIMIT = 1024 * 1024 * 1024
     resource.setrlimit(resource.RLIMIT_AS, (MEMLIMIT, MEMLIMIT))
     os.nice(20)
 
@@ -34,10 +34,10 @@ def compile_program(program):
     r = subprocess.check_output(['file', '--mime', program])
     mime = r.split(':')[1].split(';')[0].strip()
     if mime == 'application/x-executable':
-        message('Detected Linux compiled program')
+        message('Linux compiled program')
         os.chmod(program, 0o755)
     elif mime == 'application/x-dosexec':
-        message('Detected Windows compiled program')
+        message('Windows compiled program')
         os.rename('program', 'program.exe')
         with open('program', 'w') as f:
             f.write('#!/bin/sh\nwine program.exe\nexit 0\n')
