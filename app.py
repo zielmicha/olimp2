@@ -42,6 +42,9 @@ def handle0(environ, path, fields):
         data = fields['data'].value
         task = fields['tasks'].value
         ident = begin_checking(data, task)
+        print 'begin checking task %s for user %s (id=%s)' % (task,
+                                                              environ.get('REMOTE_USER'),
+                                                              ident)
         return 302, [('Location', '/#' + ident)], []
 
     if path in os.listdir('.'):

@@ -15,6 +15,7 @@ var cached = [];
 
 function load_msg() {
     var ident = location.hash.slice(1)
+    if(ident.length == 0) return
     $.ajax({
         url: '/' + ident + '.' + cached.length + '.wait.js',
         success: function(data) {
