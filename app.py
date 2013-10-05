@@ -47,7 +47,7 @@ def handle0(environ, path, fields):
                                                               ident)
         return 302, [('Location', '/#' + ident)], []
 
-    if path in os.listdir('.'):
+    if path in os.listdir('.') and not path.endswith('.py'):
         return 200, headers, [open(path).read()]
     elif path == 'tasks.js':
         return 200, headers, [json.dumps(get_tasks())]
