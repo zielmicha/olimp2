@@ -8,6 +8,8 @@ import sys
 import time
 import resource
 
+LIMIT_MB = 512
+
 def main():
     null = open('/dev/null', 'w')
     os.dup2(null.fileno(), 2)
@@ -18,7 +20,7 @@ def main():
 
 def main0():
     resource.setrlimit(resource.RLIMIT_NPROC, (1024, 1024))
-    MEMLIMIT = 1024 * 1024 * 1024
+    MEMLIMIT = LIMIT_MB * 1024 * 1024
     resource.setrlimit(resource.RLIMIT_AS, (MEMLIMIT, MEMLIMIT))
     os.nice(20)
 
@@ -69,7 +71,8 @@ def run_test(program_path, test):
     output = open('out', 'w')
     program = subprocess.Popen([program_path],
                                stdin=generator.stdout,
-                               stdout=output)
+                               stdout=output,
+                               preexec_fn=apply_limit)
     code = program.wait()
     if code != 0:
         message('Program exited with error code %d' % code, 'error')
@@ -92,6 +95,9 @@ def call(argv):
                          stderr=subprocess.STDOUT)
     for line in iter(p.stdout.readline, ''):
         message(line, 'warning')
+
+def apply_limit():
+    resource.setrlimit(resource.RLIMIT_NPROC, (1, 1))
 
 def message(msg, kind='msg'):
     print json.dumps({'val': msg.rstrip(), 'type': kind})
